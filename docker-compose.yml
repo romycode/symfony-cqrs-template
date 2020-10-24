@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+    php-fpm:
+        container_name: symfony-template
+        build:
+            context: .
+            dockerfile: docker/php-7.4-fpm/prod/Dockerfile
+
+    nginx:
+        container_name: nginx-template
+        build:
+            context: .
+            dockerfile: docker/nginx-1.19/dev/Dockerfile
+

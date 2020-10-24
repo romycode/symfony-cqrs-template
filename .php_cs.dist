@@ -1,0 +1,18 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__)
+    ->exclude('var')
+    ->exclude('tests/_support')
+    ->exclude('tests/_output')
+    ->exclude('vendor')
+;
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony' => true,
+        '@PSR1' => true,
+        '@PSR2' => true
+    ])
+    ->setFinder($finder)
+;

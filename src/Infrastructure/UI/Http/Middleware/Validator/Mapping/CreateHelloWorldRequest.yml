@@ -1,0 +1,4 @@
+App\Infrastructure\UI\Http\HelloWorld\Request\CreateHelloWorldRequest:
+  properties:
+    greeting:
+      - NotBlank: ~

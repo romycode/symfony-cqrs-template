@@ -1,0 +1,19 @@
+parameters:
+  level: 6 # https://phpstan.org/user-guide/rule-levels
+  paths:
+    - src
+  inferPrivatePropertyTypeFromConstructor: true
+  checkMissingIterableValueType: false
+  checkGenericClassInNonGenericObjectType: false
+  excludes_analyse:
+      - %currentWorkingDirectory%/tests/_support
+      - %currentWorkingDirectory%/tests/_output
+      - %currentWorkingDirectory%/tests/_data
+      - %currentWorkingDirectory%/tests/functional
+      - %currentWorkingDirectory%/tests/acceptance
+      - %currentWorkingDirectory%/tests/unit
+
+      # getSubscribedEvents can't have type hint return because is implementing a symfony library
+      - %currentWorkingDirectory%/src/Infrastructure/UI/Http/Middleware/ExceptionMiddleware.php
+  autoload_directories:
+    - %currentWorkingDirectory%/tests

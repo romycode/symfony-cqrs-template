@@ -1,0 +1,14 @@
+get_hello_world:
+    path: /hello-world/{greet}
+    controller: App\Infrastructure\UI\Http\HelloWorld\GetHelloWorldController::execute
+    methods: [ GET ]
+
+post_hello_world:
+    path: /hello-world
+    methods: [ POST ]
+    controller: App\Infrastructure\UI\Http\HelloWorld\PostHelloWorldController::execute
+
+health_check:
+    path: /health
+    methods: [ GET ]
+    controller: App\Infrastructure\UI\Http\HealthCheck\GetHealthCheckController::execute

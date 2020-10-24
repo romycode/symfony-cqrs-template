@@ -1,0 +1,40 @@
+grumphp:
+    hooks_dir: ~
+    hooks_preset: local
+    git_hook_variables:
+        EXEC_GRUMPHP_COMMAND: 'docker exec -t symfony-template'
+    stop_on_failure: false
+    ignore_unstaged_changes: false
+    hide_circumvention_tip: false
+    process_timeout: 60
+    parallel:
+        enabled: true
+        max_workers: 10
+    tasks:
+        git_branch_name: ~
+        git_blacklist:
+            keywords:
+                - "echo"
+                - "die"
+                - "var_dump"
+                - "exit;"
+            whitelist_patterns: [ ]
+            triggered_by: [ 'php' ]
+            regexp_type: G
+        composer: ~
+        shell: ~
+        phpstan:
+            level: 1
+            memory_limit: "-1"
+        codeception:
+            config_file: ~
+            fail_fast: false
+            suite: functional
+            test: ~
+        phpunit:
+            config_file: ~
+            testsuite: ~
+            group: [ ]
+            always_execute: false
+    testsuites: [ ]
+    extensions: [ ]
