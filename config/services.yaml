@@ -1,0 +1,109 @@
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    _instanceof:
+        # Tag handlers for Command, Query and Event bus with the interfaces
+        App\Application\Event\EventBusHandler:
+            tags:
+                - { name: messenger.message_handler, bus: event.bus }
+
+        App\Application\Query\QueryBusHandler:
+            tags:
+                - { name: messenger.message_handler, bus: query.bus }
+
+        App\Application\Command\CommandBusHandler:
+            tags:
+                - { name: messenger.message_handler, bus: command.bus }
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude:
+            - '../src/Kernel.php'
+
+    ################################################################################################
+    # DOMAIN SERVICES #
+
+    # Repositories #
+
+    App\Domain\HelloWorld\ReadHelloWorldRepository:
+        class: App\Infrastructure\Persistence\InMemory\InMemoryReadHelloWorldRepository
+
+    App\Domain\HelloWorld\WriteHelloWorldRepository:
+        class: App\Infrastructure\Persistence\InMemory\InMemoryWriteHelloWorldRepository
+
+    # Repositories #
+
+    # DOMAIN SERVICES #
+    ################################################################################################
+    # APPLICATION SERVICES #
+
+    # Commands #
+
+    App\Application\Command\CommandBus:
+        class: App\Infrastructure\Messaging\Bus\MessengerCommandBus
+
+    # Commands #
+
+    # Queries #
+
+    App\Application\Query\QueryBus:
+        class: App\Infrastructure\Messaging\Bus\MessengerQueryBus
+
+    # Queries #
+
+    # Events #
+
+    App\Application\Event\EventBus:
+        class: App\Infrastructure\Messaging\Bus\MessengerEventBus
+
+    # Events #
+
+    # APPLICATION SERVICES #
+    ################################################################################################
+    # INFRASTRUCTURE SERVICES #
+
+    # Serializer #
+
+    App\Infrastructure\UI\Http\Middleware\RequestDeserializer:
+        arguments:
+            - '@symfony.serializer'
+
+    symfony.serializer:
+        class: Symfony\Component\Serializer\Serializer
+        arguments:
+            $normalizers: [ '@Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer' ]
+            $encoders: [ '@serializer.encoder.json' ]
+
+    Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer:
+        arguments: [ '@serializer.mapping.class_metadata_factory', '@serializer.name_converter.camel_case_to_snake_case' ]
+        tags: [ serializer.normalizer ]
+
+    # Serializer #
+
+    # Controllers #
+
+    App\Infrastructure\UI\Http\HelloWorld\:
+        resource: '%kernel.project_dir%/src/Infrastructure/UI/Http/HelloWorld/*Controller.php'
+        tags:
+            - controller.service_arguments
+
+    App\Infrastructure\UI\Http\HealthCheck\:
+        resource: '%kernel.project_dir%/src/Infrastructure/UI/Http/HealthCheck/*Controller.php'
+        tags:
+            - controller.service_arguments
+
+    # Controllers #
+
+    # INFRASTRUCTURE SERVICES #
+    ################################################################################################
+
+
+

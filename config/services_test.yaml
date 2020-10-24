@@ -1,0 +1,8 @@
+# Implement all the services that are going to be tested in Integration tests
+# You must make them public to be accessible through the container
+
+services:
+    App\Infrastructure\Messaging\Bus\MessengerEventBus:
+        public: true
+        arguments:
+            - '@messenger.routable_message_bus'
