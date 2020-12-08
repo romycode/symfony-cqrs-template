@@ -198,6 +198,9 @@
     "ocramius/proxy-manager": {
         "version": "2.8.0"
     },
+    "ondram/ci-detector": {
+        "version": "3.5.1"
+    },
     "opis/closure": {
         "version": "3.6.0"
     },
@@ -340,6 +343,9 @@
     },
     "seld/jsonlint": {
         "version": "1.8.2"
+    },
+    "softcreatr/jsonpath": {
+        "version": "0.7.2"
     },
     "symfony/amqp-messenger": {
         "version": "v5.1.7"
