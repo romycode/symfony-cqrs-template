@@ -26,11 +26,6 @@ grumphp:
         phpstan:
             level: 1
             memory_limit: "-1"
-        codeception:
-            config_file: ~
-            fail_fast: false
-            suite: functional
-            test: ~
         phpunit:
             config_file: ~
             testsuite: ~

@@ -5,7 +5,7 @@ services:
         container_name: symfony-template
         build:
             context: .
-            dockerfile: docker/php-7.4-fpm/prod/Dockerfile
+            dockerfile: docker/php-8-fpm/prod/Dockerfile
 
     nginx:
         container_name: nginx-template
