@@ -34,7 +34,7 @@
     "codeception/module-rest": "^1.2",
     "codeception/module-symfony": "^1.1",
     "friendsofphp/php-cs-fixer": "^2.16",
-    "fzaninotto/faker": "^1.9",
+    "fakerphp/faker": "^1.13",
     "phpro/grumphp": "^1.0",
     "phpstan/phpstan": "^0.12.51",
     "phpstan/phpstan-phpunit": "^0.12.16",

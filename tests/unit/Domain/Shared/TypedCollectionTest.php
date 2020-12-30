@@ -48,7 +48,7 @@ class TypedCollectionTest extends TestCase
         ]);
 
         $collection->sort(function ($v1, $v2) {
-            return $v1 > $v2;
+            return $v1->value - $v2->value;
         });
 
         $this->assertEquals([$c1, $c3, $c2], $collection->getItems());
